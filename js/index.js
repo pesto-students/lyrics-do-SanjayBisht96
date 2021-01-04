@@ -17,6 +17,7 @@ async function userAction(url) {
 
 // variable set number items(songs) to be shown on the suggestion page.
 const resultPerPage = 5;
+// variable to set page number for pagination
 let page = 0;
 
 function hideLyrics() {
@@ -123,7 +124,7 @@ function searchSuggestions(e) {
     let item = document.getElementsByClassName('show-lyrics');
     item = [...item];
 
-    // Event listner set for every show lyrics button to do api call to fetch song lyrics.
+    // Event listener set for every show lyrics button to do api call to fetch song lyrics.
     item.forEach((ele) => {
       ele.addEventListener('click', addSongListItem);
     });
