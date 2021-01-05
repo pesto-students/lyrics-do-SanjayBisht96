@@ -68,7 +68,11 @@ function addSongListItem(e) {
   const artist = e.target.getAttribute('artist');
   const title = e.target.getAttribute('title');
   const getLyricsUrl = `https://api.lyrics.ovh/v1/${artist}/${title}`;
+  const loader = '<div class="loader"></div>';
+  document.getElementById('show-lyrics-id').innerHTML = loader;
+
   if (artist && title) {
+    document.getElementById('show-lyrics-id').innerHTML = '';
     userAction(getLyricsUrl).then((data) => {
       document.getElementById('show-suggestions-id').style.display = 'none';
       document.getElementById('show-lyrics-id').innerHTML = '';
@@ -98,17 +102,21 @@ function searchSuggestions(e) {
   document.getElementById('lyrics-id').style.display = 'none';
   document.getElementsByClassName('pagination')[0].style.display = 'none';
 
+  const loader = '<div class="loader"></div>';
+  document.getElementById('suggestion-list-id').innerHTML = loader;
+
   userAction(suggestionUrl).then((data) => {
     if (data.data) {
       document.getElementsByClassName('pagination')[0].style.display = '';
       document.getElementById('suggestion-next').style.display = '';
+      document.getElementById('suggestion-list-id').innerHTML = '';
     }
 
     document.getElementById('suggestion-back').style.display = 'none';
     const list = data.data;
     list.forEach((element) => {
       if (element.artist.name && element.title) {
-        const listItem = `<div class="song-detail"><img class="song-thumbnail" src="${element.album.cover_small}"><span class="song-text"><span class="song-detail-artist">${element.artist.name}</span><span class="song-detail-title"> - ${element.title}</span></span>
+        const listItem = `<div class="song-detail"><img class="song-thumbnail" src="${element.album.cover}"><span class="song-text"><span class="song-detail-artist">${element.artist.name}</span><span class="song-detail-title"> - ${element.title}</span></span>
                 <span class="show-lyrics button"  artist="${element.artist.name}" title="${element.title}">Show Lyrics</span></div>`;
         document.getElementById('suggestion-list-id').insertAdjacentHTML('beforeend', listItem);
       }
