@@ -71,7 +71,7 @@ input{
 }
 
 .song-detail .song-thumbnail {
-    width : 80px;
+    width : 50px;
 }
 
 .song-text{
@@ -90,7 +90,7 @@ input{
     white-space: nowrap;
     overflow: hidden;
     display: inline-block;
-    width: 50%;
+    width: 20%;
     position: relative;
     top: 5px;
     left: 10;
